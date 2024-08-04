@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* styles.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, black, white,skyblue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transition: all 0.5s;
+ 
+}
+.container:hover{
+    filter: drop-shadow(1px 1px 20px black);
+}
+
+.card {
+    border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  scale: 0.5;
+  transition: all 0.5s;
+}
+.card:hover{
+scale: 1;
+rotate: 360deg;
+}
+
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 80%;
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+input:hover{
+    transition: all 0.4s;
+    filter: drop-shadow(1px 1px 5px black);
+}
+
+button {
+  background: #6e8efb;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    color: black;
+  background:white;
+  transition: 0.4s;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+</style>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Password Generator</h1>
+      <input type="text" id="password" readonly>
+      <button id="generate">Generate Password</button>
+      <button id="copy">Copy to Clipboard</button>
+    </div>
+  </div>
+
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const generateButton = document.getElementById('generate');
+  const copyButton = document.getElementById('copy');
+  const passwordField = document.getElementById('password');
+
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+
+  function generatePassword(length = 12) {
+    let password = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      password += characters[randomIndex];
+    }
+    return password;
+  }
+
+  generateButton.addEventListener('click', function() {
+    const newPassword = generatePassword();
+    passwordField.value = newPassword;
+  });
+
+  copyButton.addEventListener('click', function() {
+    passwordField.select();
+    document.execCommand('copy');
+    alert('Password copied to clipboard!');
+  });
+});
+
+    </script>
+</body>
+</html>
